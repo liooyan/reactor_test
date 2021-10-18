@@ -11,8 +11,11 @@ import reactor.core.publisher.Flux;
 public class MapTest {
     public static void main(String[] args) {
         Flux<String> strJust = Flux.just("1q", "2q", "3q");
-        strJust.map(s ->s+":qqq")
-                .filter(s -> s.equals("2q"))
+        Flux<String> cache = strJust.map(s -> s + ":qqq")
+                .filter(s -> s.equals("2q:qqq"))
+                .cache();
+
+        cache.count()
                 .subscribe(System.out::println);
 
 
