@@ -24,6 +24,7 @@ public class IterableTest {
         str.add("listC");
         str.add("listD");
         stringFlux = Flux.fromStream(str.stream());
+
         stringFlux.subscribe(System.out::println);
 
 

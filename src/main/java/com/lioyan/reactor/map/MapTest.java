@@ -12,6 +12,7 @@ public class MapTest {
     public static void main(String[] args) {
         Flux<String> strJust = Flux.just("1q", "2q", "3q");
         strJust.map(s ->s+":qqq")
+                .filter(s -> s.equals("2q"))
                 .subscribe(System.out::println);
 
 
