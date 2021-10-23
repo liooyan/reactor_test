@@ -1,5 +1,6 @@
 package com.lioyan.netty.create;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.netty.ByteBufFlux;
 import reactor.netty.DisposableServer;
@@ -20,9 +21,12 @@ public class TcpOutput {
                         .port(8080)
                         .handle((inbound, outbound) -> {
                             ByteBufFlux receive = inbound.receive();
-                            receive.asString().subscribe(System.out::println);
-
-                            return outbound.sendString(Mono.just("hello34"));
+                            Flux<String> map = receive.asString().map(s -> {
+                                System.out.println(s);
+                                s += "123sdas";
+                                return s;
+                            });
+                            return outbound.sendString(map);
                         })
                         .bindNow();
 

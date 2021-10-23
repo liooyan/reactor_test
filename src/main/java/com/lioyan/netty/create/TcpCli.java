@@ -16,34 +16,25 @@ import java.io.IOException;
  */
 public class TcpCli {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Connection connection =
                 TcpClient.create()
-                        .host("127.0.0.1")
                         .port(8080)
-                        .handle((inbound, outbound) -> {
-
-                            ByteBufFlux receive = inbound.receive();
-                            Flux<String> map = receive.asInputStream().map(s -> {
-                                byte[] bytes = new byte[1024];
-                                try {
-                                    int read = s.read(bytes);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                String s1 = new String(bytes);
-                                System.out.println(s1);
-                                return s1;
-
-                            });
-
-                            return outbound.sendString(map);
-
-                        })
+                        .handle((inbound, outbound) -> inbound.receive().asString().doOnNext(System.out::println).then())
                         .connectNow();
 
-        connection.onDispose()
-                .block();
+        connection.outbound()
+                .sendString(Mono.just("hello 1"))
+                .then()
+                .subscribe();
+        connection.outbound()
+                .sendString(Mono.just("hello 2"))
+                .then()
+                .subscribe();
+
+        connection.onDispose();
+
+        Thread.sleep(1000000);
     }
 
 }
