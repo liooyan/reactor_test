@@ -23,14 +23,11 @@ public class TcpCli {
                 .sendString(Mono.just("hello 1"))
                 .then()
                 .subscribe();
-        connection.outbound()
-                .sendString(Mono.just("hello 2"))
-                .then()
-                .subscribe();
 
         connection.onDispose();
 
-        Thread.sleep(1000000);
+
+        Thread.sleep(1000);
     }
 
 }

@@ -21,7 +21,9 @@ public class TcpOutput {
                         .handle((inbound, outbound) -> {
                             ByteBufFlux receive = inbound.receive();
                             Flux<String> map = receive.asString().map(s -> {
-                                System.out.println(s);
+                                Thread t = Thread.currentThread();
+                                String name = t.getName();
+                                System.out.println("name=" + name);
                                 s += "123sdas";
                                 return s;
                             });
