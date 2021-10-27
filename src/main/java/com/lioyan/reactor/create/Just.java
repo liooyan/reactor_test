@@ -19,7 +19,7 @@ public class Just {
         Flux<Integer> intJust = Flux.just(1,2,3,4);
         intJust.subscribe(System.out::println);
 
-        Mono<String> mono = Mono.just("1Mono");
+        Mono<String> mono = Mono.just("1Mono").map(s -> s).filter(s ->true);
         mono.subscribe(System.out::println);
 
 
