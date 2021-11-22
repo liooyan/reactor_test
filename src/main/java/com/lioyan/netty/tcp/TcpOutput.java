@@ -19,6 +19,7 @@ public class TcpOutput {
                 TcpServer.create()
                         .port(8080)
                         .handle((inbound, outbound) -> {
+                            System.out.println("内容触发");
                             ByteBufFlux receive = inbound.receive();
                             Flux<String> map = receive.asString().map(s -> {
                                 Thread t = Thread.currentThread();
