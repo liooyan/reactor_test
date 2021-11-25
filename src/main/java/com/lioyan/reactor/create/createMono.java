@@ -17,19 +17,21 @@ public class createMono {
     public static void main(String[] args) {
         List<Consumer<Integer>> list = new ArrayList<>();
         Mono<Object> objectMono = Mono.create(sink -> {
-            Consumer<Integer> listener = event -> {
-                if (event >= 400) {
-                    sink.error(new RuntimeException("Failed"));
-                } else {
-                    sink.success("success");
-                }
-            };
+                    Consumer<Integer> listener = event -> {
+                        if (event >= 400) {
+                            sink.error(new RuntimeException("Failed"));
+                        } else {
+                            sink.success("success");
+                        }
+                    };
 
-            list.add(listener);
+                    list.add(listener);
 
-            sink.onDispose(() -> System.out.println(123));
-        }).doOnNext(System.out::println);
+                    //   sink.onDispose(() -> System.out.println(123));
+                }).map(Function.identity())
+                .filter(s -> true);
 
+        objectMono.subscribe();
         objectMono.subscribe();
 
 

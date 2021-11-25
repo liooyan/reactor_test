@@ -1,6 +1,9 @@
 package com.lioyan.reactor;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.time.Duration;
 
 /**
  * {@link Main}
@@ -10,6 +13,13 @@ import reactor.core.publisher.Flux;
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+
+        Mono<Object> objectMono = Mono.create(sink -> {
+            System.out.println(sink);
+
+        });
+        objectMono.subscribe();
+
 //        Mono.just(1);
         Flux<String> seq1 = Flux.just("foo", "bar", "foobar");
 

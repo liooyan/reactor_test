@@ -13,7 +13,7 @@ public class Repeat {
     public static void main(String[] args) {
 
         Flux<String> strJust = Flux.just("1q", "2q", "3q");
-        Flux<String> repeat = strJust.repeat(1000L);
+        Flux<String> repeat = strJust.repeat(2L);
         repeat.subscribe(System.out::println);
     }
 }

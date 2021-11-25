@@ -25,7 +25,7 @@ public class TcpOutput {
                                 Thread t = Thread.currentThread();
                                 String name = t.getName();
                                 System.out.println("name=" + name);
-                                s += "123sdas";
+                                 s += "123sdas";
                                 return s;
                             });
                             return outbound.sendString(map);

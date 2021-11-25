@@ -20,7 +20,7 @@ public class Main {
                 .doOnNext(s ->  System.out.println(Thread.currentThread().getName()))
                 .publishOn(Schedulers.boundedElastic())
                 .doOnNext(s ->  System.out.println(Thread.currentThread().getName()))
-                .publishOn(Schedulers.boundedElastic())
+                //.publishOn(Schedulers.boundedElastic())
                 .doOnNext(s ->  System.out.println(Thread.currentThread().getName()))
                 .doOnNext(s ->  System.out.println(Thread.currentThread().getName()))
                 .subscribe(System.out::println);
