@@ -18,5 +18,8 @@ public class fromDirect {
 
         Mono.fromDirect(just)
                 .subscribe(s -> System.out.println(s));
+
+        Mono.from(just)
+                .subscribe(s -> System.out.println(s));
     }
 }

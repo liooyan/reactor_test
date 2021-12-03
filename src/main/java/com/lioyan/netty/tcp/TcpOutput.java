@@ -22,7 +22,7 @@ public class TcpOutput {
                             System.out.println("内容触发");
                             ByteBufFlux receive = inbound.receive();
                             Flux<String> map = receive.asString().map(s -> {
-                                Thread t = Thread.currentThread();
+                                 Thread t = Thread.currentThread();
                                 String name = t.getName();
                                 System.out.println("name=" + name);
                                  s += "123sdas";
