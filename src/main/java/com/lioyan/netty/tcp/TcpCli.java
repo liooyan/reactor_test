@@ -33,7 +33,7 @@ public class TcpCli {
         connection.onDispose();
 
 
-        Thread.sleep(100000);
+        Thread.sleep(1000000000);
     }
 
 }
