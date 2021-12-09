@@ -18,7 +18,7 @@ public class TcpCli {
                         .port(8080)
                         .handle((inbound, outbound) -> inbound.receive().asString().doOnNext(System.out::println).then())
                         .connectNow();
-
+        connection.toString();
         connection.outbound()
                 .sendString(Mono.just("hello 1"))
                 .then()
